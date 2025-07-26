@@ -387,23 +387,22 @@
   }
 
 
- 
-  const redirectTo = window.location.origin + '/supabase-auth/project.html';
-
-  async function loginWithGoogle() {
+ async function loginWithGoogle() {
     msg.innerText = '';
     msg.className = '';
     loadingBar.style.display = 'block';
 
     const { error } = await client.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo }
+      options: { redirectTo: window.location.origin + '/project.html' }
+      
     });
 
     if (error) {
       msg.innerText = error.message;
       msg.className = 'error';
       loadingBar.style.display = 'none';
+      return;
     }
   }
 
@@ -414,16 +413,18 @@
 
     const { error } = await client.auth.signInWithOAuth({
       provider: 'facebook',
-      options: { redirectTo }
+      options: { redirectTo: window.location.origin + '/project.html' }
     });
 
     if (error) {
       msg.innerText = error.message;
       msg.className = 'error';
       loadingBar.style.display = 'none';
+      return;
     }
   }
 
+ 
   async function loginWithGitHub() {
     msg.innerText = '';
     msg.className = '';
@@ -431,15 +432,17 @@
 
     const { error } = await client.auth.signInWithOAuth({
       provider: 'github',
-      options: { redirectTo }
+      options: { redirectTo: window.location.origin + '/project.html' }
     });
 
     if (error) {
       msg.innerText = error.message;
       msg.className = 'error';
       loadingBar.style.display = 'none';
+      return;
     }
   }
+
   
   </script>
 </body>
