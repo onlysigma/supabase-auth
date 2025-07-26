@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    .signup-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .signup-card {
+      background-color: #1a1a23;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #2a2a35;
+    }
+
+    .signup-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #7a5af5, #a78bfa);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo i {
+      font-size: 2.5rem;
+      color: #7a5af5;
+      margin-bottom: 0.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #7a5af5, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #e0e0e0;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      color: #a0a0a8;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #2a2a35;
+      font-size: 0.9375rem;
+      transition: all 0.3s ease;
+      background-color: #252531;
+      color: #e0e0e0;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #7a5af5;
+      box-shadow: 0 0 0 3px rgba(122, 90, 245, 0.2);
+      background-color: #2a2a35;
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #a0a0a8;
+      transition: all 0.3s ease;
+      background: none;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .toggle-password:hover {
+      color: #7a5af5;
+    }
+
+    .loading-bar-container {
+      width: 100%;
+      height: 4px;
+      background: rgba(122, 90, 245, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7a5af5, #a78bfa);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { width: 0%; margin-left: 0; }
+      50% { width: 100%; margin-left: 0; }
+      100% { width: 0%; margin-left: 100%; }
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.875rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+      background: #7a5af5;
+      color: white;
+      margin: 1.5rem 0;
+    }
+
+    .btn-primary:hover {
+      background: #6a4ae0;
+    }
+
+    #msg {
+      font-size: 0.875rem;
+      text-align: center;
+      margin: 1rem 0;
+      padding: 0.75rem;
+      border-radius: 8px;
+    }
+
+    .error {
+      color: #ff5a5f;
+      background-color: rgba(255, 90, 95, 0.1);
+      border: 1px solid rgba(255, 90, 95, 0.2);
+    }
+
+    .success {
+      color: #00d1b2;
+      background-color: rgba(0, 209, 178, 0.1);
+      border: 1px solid rgba(0, 209, 178, 0.2);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #a0a0a8;
+      font-size: 0.875rem;
+    }
+
+    .login-link a {
+      color: #7a5af5;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="signup-card">
+      <div class="logo">
+        <i class="fas fa-user-plus"></i>
+        <h1>SecureAuth</h1>
+      </div>
+      
+      <h2>Create Account</h2>
+      
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" class="input-field" placeholder="Enter your name" />
+      </div>
+      
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" class="input-field" placeholder="abc@gmail.com" />
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input type="password" id="password" class="input-field" placeholder="••••••••" />
+          <button class="toggle-password" id="togglePassword">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="loading-bar-container" id="loadingBar">
+        <div class="loading-bar"></div>
+      </div>
+      
+      <button class="btn btn-primary" onclick="signup()">
+        <i class="fas fa-user-plus"></i> Sign Up
+      </button>
+      
+      <div id="msg"></div>
+      
+      <div class="login-link">
+        Already have an account? <a href="index.html">Log in</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabaseUrl = 'https://xzypzkjqjcabioedvmzr.supabase.co'
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6eXB6a2pxamNhYmlvZWR2bXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxOTYzOTcsImV4cCI6MjA2ODc3MjM5N30.5Ic571hDQ8iYDfnKg9WCxLTX7VUoLwXxQ967PrRYYW4'
+    const client = supabase.createClient(supabaseUrl, supabaseKey)
+    
+    
+  const msg = document.getElementById('msg');
+  const togglePassword = document.getElementById('togglePassword');
+  const password = document.getElementById('password');
+  const loadingBar = document.getElementById('loadingBar');
+
+  togglePassword.addEventListener('click', () => {
+    const type = password.type === 'password' ? 'text' : 'password';
+    password.type = type;
+    const icon = togglePassword.querySelector('i');
+    icon.classList.toggle('fa-eye', type === 'text');
+    icon.classList.toggle('fa-eye-slash', type === 'password');
+  });
+
+  async function signup() {
+    msg.innerText = '';
+    msg.className = '';
+    loadingBar.style.display = 'block';
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const pass = password.value;
+
+    const { data, error } = await client.auth.signUp({
+      email: email,
+      password: pass,
+      options: {
+        data: { full_name: name },
+        
+      }
+    });
+
+    if (error) {
+      msg.innerText = error.message;
+      msg.className = 'error';
+      loadingBar.style.display = 'none';
+      return;
+    }
+
+    if (data && data.user) {
+      msg.innerText = 'Signup successful! Redirecting to login...';
+      msg.className = 'success';
+
+      setTimeout(() => {
+        window.location.href = 'index.html'; 
+      }, 1000);
+    }
+
+    loadingBar.style.display = 'none';
+  }
+  </script>
+</body>
+</html>
