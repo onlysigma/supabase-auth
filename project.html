@@ -265,9 +265,9 @@
       const { data: { session } } = await client.auth.getSession();
       }
 
-    //   if (!session) {
-    //     window.location.href = 'index.html';
-    //     return;
+      if (!session) {
+        window.location.href = 'index.html';
+        return;
 
       const user = session.user;
       const email = user.email;
