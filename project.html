@@ -261,12 +261,12 @@
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6eXB6a2pxamNhYmlvZWR2bXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxOTYzOTcsImV4cCI6MjA2ODc3MjM5N30.5Ic571hDQ8iYDfnKg9WCxLTX7VUoLwXxQ967PrRYYW4'
     const client = supabase.createClient(supabaseUrl, supabaseKey)
 
-    async function loadProfile() {
-      const { data: { session } } = await client.auth.getSession();
+    // async function loadProfile() {
+    //   const { data: { session } } = await client.auth.getSession();
 
-      if (!session) {
-        window.location.href = 'index.html';
-        return;
+    //   if (!session) {
+    //     window.location.href = 'index.html';
+    //     return;
       }
 
       const user = session.user;
