@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Cyber Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #6c5ce7;
-      --primary-light: #a29bfe;
-      --primary-dark: #5649c0;
-      --text: #2d3436;
-      --text-light: #636e72;
-      --bg: #f5f6fa;
-      --card-bg: #ffffff;
-      --border: #dfe6e9;
-      --error: #d63031;
-      --success: #00b894;
-      --shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      --primary: #0f0;
+      --primary-light: rgba(0, 255, 0, 0.3);
+      --primary-dark: #0a0;
+      --text: #e0e0e0;
+      --text-light: #a0a0a8;
+      --bg: #000;
+      --card-bg: rgba(0, 10, 0, 0.9);
+      --border: rgba(0, 255, 0, 0.3);
+      --error: #f00;
+      --success: #0f0;
+      --shadow: 0 0 20px rgba(0, 255, 0, 0.1);
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
@@ -28,30 +28,48 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-  background-color: #2d3436;
+      font-family: 'Share Tech Mono', monospace;
+      background-color: var(--bg);
       min-height: 100vh;
       padding: 20px;
       color: var(--text);
-      background-image: radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, rgba(108, 92, 231, 0.05) 90%);
+      background-image: 
+        linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      overflow: hidden;
     }
 
     .profile-container {
       max-width: 500px;
       margin: 0 auto;
-      perspective: 1000px;
+      position: relative;
+    }
+
+    .profile-container::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: linear-gradient(45deg, var(--primary), var(--primary), #000, var(--primary));
+      z-index: -1;
+      background-size: 400%;
+      animation: borderGlow 8s linear infinite;
+      border-radius: 20px;
     }
 
     .profile-card {
-    background-color: #181f22;
+      background-color: var(--card-bg);
       padding: 2.5rem;
       border-radius: 16px;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      transform-style: preserve-3d;
       position: relative;
       overflow: hidden;
       text-align: center;
+      border: 1px solid var(--border);
     }
 
     .profile-card::before {
@@ -60,13 +78,9 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
-    }
-
-    .profile-card:hover {
-      transform: translateY(-5px) rotateX(1deg);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      animation: scanline 3s linear infinite;
     }
 
     .avatar-container {
@@ -74,6 +88,10 @@
       width: 120px;
       height: 120px;
       margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 20px var(--primary-light);
+      padding: 3px;
     }
 
     .avatar {
@@ -81,70 +99,103 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: var(--transition);
+      filter: hue-rotate(0deg);
     }
 
     .avatar:hover {
-      transform: scale(1.05);
+      filter: hue-rotate(90deg);
     }
 
     .edit-avatar {
       position: absolute;
-      bottom: 0;
-      right: 0;
+      bottom: 5px;
+      right: 5px;
       width: 36px;
       height: 36px;
       background: var(--primary);
-      color: white;
+      color: #000;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      border: 2px solid white;
+      border: 2px solid #000;
       transition: var(--transition);
+      font-weight: bold;
     }
 
     .edit-avatar:hover {
-      background: var(--primary-dark);
+      background: #000;
+      color: var(--primary);
+      border-color: var(--primary);
       transform: scale(1.1);
     }
 
     h2 {
       font-size: 1.75rem;
-      font-weight: 600;
+      font-weight: 400;
       margin-bottom: 0.5rem;
-      color: white
+      color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-light);
+      letter-spacing: 2px;
     }
 
     .user-email {
-      color: white;
+      color: var(--text-light);
       margin-bottom: 2rem;
       font-size: 1rem;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    .user-email::after {
+      content: "_";
+      animation: blink 1s step-end infinite;
+      position: absolute;
     }
 
     .profile-stats {
       display: flex;
       justify-content: space-around;
       margin: 2rem 0;
+      padding: 1rem;
+      background: rgba(0, 20, 0, 0.5);
+      border-radius: 10px;
+      border: 1px solid var(--border);
     }
 
     .stat {
       text-align: center;
+      position: relative;
+    }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      right: -1rem;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .stat:last-child::after {
+      display: none;
     }
 
     .stat-value {
       font-size: 1.5rem;
       font-weight: 600;
-      color: blue;
+      color: var(--primary);
       margin-bottom: 0.25rem;
+      text-shadow: 0 0 5px var(--primary-light);
     }
 
     .stat-label {
       font-size: 0.875rem;
-      color: #dfe6e9;
+      color: var(--text-light);
+      letter-spacing: 1px;
     }
 
     .profile-actions {
@@ -156,7 +207,7 @@
 
     .btn {
       padding: 0.875rem;
-      border-radius: 10px;
+      border-radius: 4px;
       border: none;
       font-size: 0.9375rem;
       font-weight: 600;
@@ -166,46 +217,82 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 15px var(--primary-light);
     }
 
     .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-secondary {
-      background: white;
+      background: rgba(0, 255, 0, 0.1);
       color: var(--primary);
       border: 1px solid var(--primary);
     }
 
+    .btn-primary:hover {
+      background: rgba(0, 255, 0, 0.2);
+    }
+
+    .btn-primary::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-secondary {
+      background: rgba(0, 20, 0, 0.5);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
     .btn-secondary:hover {
-      background: rgba(108, 92, 231, 0.05);
+      background: rgba(0, 30, 0, 0.7);
     }
 
     .btn-logout {
-      background: #ff4757;
-      color: white;
+      background: rgba(255, 0, 0, 0.1);
+      color: #f00;
+      border: 1px solid rgba(255, 0, 0, 0.3);
       margin-top: 1rem;
     }
 
     .btn-logout:hover {
-      background: #d63031;
+      background: rgba(255, 0, 0, 0.2);
     }
 
-    /* Animation */
+    /* Animations */
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes scanline {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .avatar {
@@ -219,37 +306,37 @@
       <div class="avatar-container">
         <img id="avatar" class="avatar" src="" alt="Profile Image" />
         <div class="edit-avatar">
-          <i class="fas fa-pencil-alt"></i>
+          <i class="fas fa-code"></i>
         </div>
       </div>
       
-      <h2 id="user-name">Loading...</h2>
-      <div class="user-email" id="user-email">Loading...</div>
+      <h2 id="user-name">LOADING AGENT DATA...</h2>
+      <div class="user-email" id="user-email">decrypting_user_data...</div>
       
       <div class="profile-stats">
         <div class="stat">
           <div class="stat-value">24</div>
-          <div class="stat-label">Projects</div>
+          <div class="stat-label">MISSIONS</div>
         </div>
         <div class="stat">
           <div class="stat-value">1.2K</div>
-          <div class="stat-label">Followers</div>
+          <div class="stat-label">CONNECTIONS</div>
         </div>
         <div class="stat">
           <div class="stat-value">86</div>
-          <div class="stat-label">Following</div>
+          <div class="stat-label">TARGETS</div>
         </div>
       </div>
       
       <div class="profile-actions">
         <button class="btn btn-primary">
-          <i class="fas fa-cog"></i> Edit Profile
+          <i class="fas fa-terminal"></i> UPDATE PROTOCOLS
         </button>
         <button class="btn btn-secondary">
-          <i class="fas fa-envelope"></i> Contact Support
+          <i class="fas fa-shield-alt"></i> REQUEST BACKUP
         </button>
         <button class="btn btn-logout" onclick="logout()">
-          <i class="fas fa-sign-out-alt"></i> Logout
+          <i class="fas fa-power-off"></i> TERMINATE SESSION
         </button>
       </div>
     </div>
@@ -271,10 +358,10 @@
 
       const user = session.user;
       const email = user.email;
-      const name = user.user_metadata?.full_name || "User";
+      const name = user.user_metadata?.full_name || "AGENT";
       const avatar = user.user_metadata?.avatar_url || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200";
 
-      document.getElementById('user-name').innerText = name;
+      document.getElementById('user-name').innerText = name.toUpperCase();
       document.getElementById('user-email').innerText = email;
       document.getElementById('avatar').src = avatar;
     }
@@ -284,7 +371,11 @@
       window.location.href = 'index.html';
     }
 
-    loadProfile();
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        loadProfile();
+      }, 1500); 
+    });
   </script>
 </body>
 </html>
